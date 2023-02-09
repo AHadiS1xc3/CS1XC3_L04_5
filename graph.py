@@ -122,12 +122,10 @@ def paths (G:Graph, node1 ):
     return lstnode
 
 def isCycle (G:Graph , node1):
-    
     p_node1 = paths(G,node1)
-
     for n1 in p_node1:
         for n2 in p_node1:
-            if G.are_connected(n1,n2):
+            if DFS(G,n1,n2):
                 return True
     return False
 
