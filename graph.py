@@ -106,6 +106,37 @@ def DFS3(G : Graph, node1):
 
     return pred
 
+#has_cycle
+def has_cycle(G):
+    def DFSCycleChecker(node1, parent, marked):
+        marked[node1] = True
+        for node in G.adjacent_nodes(node1):
+            if marked[node] == False:
+                if DFSCycleChecker(node, node1, marked) == True:
+                    return True
+            elif node != parent:
+                return True
+        return False
+
+    marked = [False] * len(G.adj)
+    for i in range(len(G.adj)):
+        if marked[i] == False:
+            if DFSCycleChecker(i, -1, marked) == True:
+                return True
+    return False
+
+#is_connected
+def is_connected(G):
+    def dfs(node, marked):
+        marked.add(node)
+        for adj in G.adjacent_nodes(node):
+            if adj not in marked:
+                dfs(adj, marked)
+
+    marked = set()
+    dfs(list(G.adj.keys())[0], marked)
+    return len(marked) == len(G.adj)
+
 
 def paths (G:Graph, node1 ):
     S = [node1]
@@ -138,12 +169,7 @@ def has_cyclePrint (G: Graph):
         
     return False
 
-def has_cycle (G: Graph):
-    for node in G.adj:
-        if isCycle(G,node):
-            return True
-        
-    return False
+
 test = Graph(6)
 
 test.add_edge(0,1)
