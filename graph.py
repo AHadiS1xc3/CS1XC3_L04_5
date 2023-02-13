@@ -117,7 +117,6 @@ def has_cycle(G):
             elif node != parent:
                 return True
         return False
-
     marked = [False] * len(G.adj)
     for i in range(len(G.adj)):
         if marked[i] == False:
@@ -170,20 +169,22 @@ def has_cyclePrint (G: Graph):
     return False
 
 
-test = Graph(6)
 
-test.add_edge(0,1)
-test.add_edge(1,2)
-test.add_edge(2,4)
-test.add_edge(4,0)
+if __name__ == "main":
+    test = Graph(6)
 
-#test.add_edge(1,3)
-#test.add_edge(2,4)
-#test.add_edge(2,3)
-#test.add_edge(3,4)
-#test.add_edge(3,5)
-print(test)
-print (BFS3(test,0))
-print(DFS3(test,0))
-has_cyclePrint(test)
-print((has_cycle(test)))
+    test.add_edge(0,1)
+    test.add_edge(1,2)
+    test.add_edge(2,4)
+    test.add_edge(4,0)
+
+    #test.add_edge(1,3)
+    #test.add_edge(2,4)
+    #test.add_edge(2,3)
+    #test.add_edge(3,4)
+    #test.add_edge(3,5)
+    print(test)
+    print (BFS3(test,0))
+    print(DFS3(test,0))
+    has_cyclePrint(test)
+    print((has_cycle(test)))
