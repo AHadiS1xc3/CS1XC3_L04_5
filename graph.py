@@ -1,5 +1,6 @@
 from collections import deque
 import random 
+import graph 
 
 #Undirected graph using an adjacency list
 class Graph:
