@@ -171,26 +171,6 @@ if __name__ == "main":
     test.add_edge(2,4)
     test.add_edge(4,0)
 
-<<<<<<< HEAD
-
-def has_cyclePrint (G: Graph):
-    for node in G.adj:
-        print(node,isCycle(G,node))
-        
-    return False
-
-
-
-if __name__ == "main":
-    test = Graph(6)
-
-    test.add_edge(0,1)
-    test.add_edge(1,2)
-    test.add_edge(2,4)
-    test.add_edge(4,0)
-
-=======
->>>>>>> main
     #test.add_edge(1,3)
     #test.add_edge(2,4)
     #test.add_edge(2,3)
@@ -199,8 +179,4 @@ if __name__ == "main":
     print(test)
     print (BFS3(test,0))
     print(DFS3(test,0))
-<<<<<<< HEAD
-    has_cyclePrint(test)
-=======
->>>>>>> main
     print((has_cycle(test)))
