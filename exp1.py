@@ -3,23 +3,35 @@ import graph as g
 from tqdm import tqdm
 
 
-epochs    = 10000
-num_nodes = 10
-num_runs  = 10*11//2
 
-probs     = []
-# note u should delete the tqdm package
-for num_edges in  tqdm(range (num_runs)):
-    num_cycs = 0
-    for _ in range(epochs):
-        graph = g.create_rand_graph_safe(num_nodes,num_edges)
-        if g.has_cycle(graph):
-            num_cycs += 1
-            #print(graph.adj)
-            #print (num_cycs)
-    probs.append(num_cycs/epochs)
+def run_tests(epochs, num_nodes, tot_edges, label):
+    probs     = []
+    # note u should delete the tqdm package
+    for num_edges in  tqdm(range (tot_edges)):
+        num_cycs = 0
+        for _ in range(epochs):
+            graph = g.create_rand_graph_safe(num_nodes,num_edges)
+            if g.has_cycle(graph):
+                num_cycs += 1
+                #print(graph.adj)
+             #print (num_cycs)
+        probs.append(num_cycs/epochs)
+    plt.plot(probs, label=label)
 
-plt.plot(probs)
+
+epochs    = 1000
+num_nodes_1 = 100
+num_nodes_2 = 90
+num_nodes_3 = 80
+
+run_tests(epochs,num_nodes_1, num_nodes_1 -1 , "size: 100")
+run_tests(epochs,num_nodes_2, num_nodes_2 -1 , "size: 90")
+run_tests(epochs,num_nodes_3, num_nodes_3 -1 , "size: 80")
+
+plt.legend(loc="upper left")
+plt.title("Edge vs Cycle Probability")
+plt.xlabel("Number of edges")
+plt.ylabel("Cycle Probability")
 plt.show()
     
 
