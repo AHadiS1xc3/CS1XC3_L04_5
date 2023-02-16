@@ -174,6 +174,20 @@ def create_rand_graph_safe (num_nodes, num_edges):
         G.add_edge(x,y)
     return G
 
+# Created a faster version of the create_rand_graph_safe function
+# now successive runs of this functions will not be as slow since
+# we do need to calculte the lst_tups lst as often
+def create_rand_graph_safe_fast (num_nodes, num_edges ,lst_tups):
+    G = Graph(num_nodes)
+    for i  in range (num_edges):
+        if len(lst_tups) == 0 :
+            print ("You added to many edges.")
+        tup = lst_tups.pop(random.randint(0, len(lst_tups) - 1))
+        x = tup[0]
+        y = tup[1]
+        G.add_edge(x,y)
+    return G
+
 if __name__ == "__main__":
     test = Graph(6)
 
