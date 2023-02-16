@@ -18,6 +18,10 @@ class Graph:
         self.adj[len(self.adj)] = []
 
     def add_edge(self, node1, node2):
+        if node1 == node2:
+            self.adj[node1].append(node2)
+            return
+            
         if node1 not in self.adj[node2]:
             self.adj[node1].append(node2)
             self.adj[node2].append(node1)
@@ -133,19 +137,22 @@ def create_random_graph(i, j):
     for _ in range(j):
         rand1 = random.randint(0,i - 1)
         rand2 = random.randint(0,i - 1)    
-        while ( rand2 in G.adj[rand1]):
-            print (rand1,rand2)
+        while ( rand2 in G.adj[rand1] ):
+            print (rand1,rand2, "U may have added too many nodes")
             rand1 = random.randint(0,i - 1)
-            rand2 = random.randint(0,i - 1)    
+            rand2 = random.randint(0,i - 1) 
+        
         G.add_edge (rand1, rand2)
     return G
 # Created random graph
 """ The problem with the create random
     function above is that it can potentially
-    run into an infinite while loop. 
+    run into the while loop multiple tims. 
     This function is more safe then that version 
     beacuse it just crashes if too many edges 
-    are added
+    are added, and potentially faster since we 
+    are not needlessly looping over nodes we already
+    added.
 """
 def create_rand_graph_safe (num_nodes, num_edges):
     lst_tups = []
@@ -163,7 +170,7 @@ def create_rand_graph_safe (num_nodes, num_edges):
         G.add_edge(x,y)
     return G
 
-if __name__ == "main":
+if __name__ == "__main__":
     test = Graph(6)
 
     test.add_edge(0,1)
