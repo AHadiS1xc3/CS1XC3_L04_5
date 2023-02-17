@@ -135,6 +135,69 @@ def is_connected(G):
     dfs(list(G.adj.keys())[0], marked)
     return len(marked) == len(G.adj)
 
+#approx1
+def approx1(G):
+    C = set()
+    copy = Graph(len(G.adj))
+    for node in G.adj:
+        for adjacent_node in G.adj[node]:
+            copy.add_edge(node, adjacent_node)
+    vertex_cover=False
+    
+    while vertex_cover == False:
+        max_degree_node = None
+        max_degree = -1
+        for node in copy.adj:
+            degree = len(copy.adjacent_nodes(node))
+            if degree > max_degree:
+                max_degree_node = node
+                max_degree = degree
+        v = max_degree_node
+        print(v)
+        C.add(v)
+        for node in copy.adjacent_nodes(v):
+            if (v in copy.adj[node]):
+                copy.adj[node].remove(v)
+        del copy.adj[v]
+        if (is_vertex_cover(G, C)==True):
+            vertex_cover=True
+    return C
+
+#approx2
+def approx2(G):
+    C = set()
+    while not is_vertex_cover(G, C):
+        v = random.choice([node for node in G.adj if node not in C])
+        C.add(v)
+    return C
+
+#approx3
+def approx3(G):
+    C = set()
+    copy = Graph(len(G.adj))
+    for node in G.adj:
+        for adjacent_node in G.adj[node]:
+            copy.add_edge(node, adjacent_node)
+    vertex_cover=False
+    
+    while vertex_cover==False:
+        select = False
+        while select == False:
+            v = random.choice([node for node in G.adj])
+            if (len(copy.adj[v])>=1):
+                c = random.choice(copy.adj[v])
+                select = True
+        C.add(v)
+        C.add(c)
+        for node in copy.adjacent_nodes(v):
+            if (v in copy.adj[node]):
+                copy.adj[node].remove(v)
+            if (c in copy.adj[node]):
+                copy.adj[node].remove(c)
+        if (is_vertex_cover(G, C)==True):
+            vertex_cover=True
+    return C
+
 # Created random graph
 def create_random_graph(i, j):
     G = Graph(i)
