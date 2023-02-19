@@ -124,7 +124,7 @@ def is_vertex_cover(G, C):
     return True
 
 def MVC(G):
-    nodes = [i for i in range(G.get_size())]
+    nodes = [i for i in range(len(G.adj))]
     subsets = power_set(nodes)
     min_cover = nodes
     for subset in subsets:
