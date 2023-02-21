@@ -188,6 +188,8 @@ def create_rand_graph_safe_fast (num_nodes, num_edges ,lst_tups):
         G.add_edge(x,y)
     return G
 
+
+
 if __name__ == "__main__":
     test = Graph(6)
 
