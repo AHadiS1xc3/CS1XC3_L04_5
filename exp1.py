@@ -33,6 +33,7 @@ num_nodes_3 = 80
 
 
 
+# --- CODE BELOW GENERATED FIG 1.1 ----
 run_tests(epochs,num_nodes_1, num_nodes_1 -1 , gen_all_edges(num_nodes_1) ,"size: 100")
 run_tests(epochs,num_nodes_2, num_nodes_2 -1 , gen_all_edges(num_nodes_2) ,"size: 90")
 run_tests(epochs,num_nodes_3, num_nodes_3 -1 , gen_all_edges(num_nodes_3) ,"size: 80")
@@ -42,6 +43,6 @@ plt.title("Edge vs Cycle Probability")
 plt.xlabel("Number of edges")
 plt.ylabel("Cycle Probability")
 plt.show()
-    
+#--------------------------------------
 
 
