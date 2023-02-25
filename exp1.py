@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import graph as g 
-
+from tqdm import tqdm
 
 def gen_all_edges (num_nodes):
 
@@ -14,7 +14,7 @@ def gen_all_edges (num_nodes):
 
 def run_tests(epochs, num_nodes, tot_edges, lst_tups  ,label):
     probs     = []
-    for num_edges in range (tot_edges):
+    for num_edges in  tqdm (range (tot_edges)):
         num_cycs = 0
         for _ in range(epochs):
             graph = g.create_rand_graph_safe_fast(num_nodes,num_edges,lst_tups.copy())
@@ -26,7 +26,7 @@ def run_tests(epochs, num_nodes, tot_edges, lst_tups  ,label):
     plt.plot(probs, label=label)
 
 
-epochs    = 10000
+epochs    = 1000
 num_nodes_1 = 100
 num_nodes_2 = 90
 num_nodes_3 = 80

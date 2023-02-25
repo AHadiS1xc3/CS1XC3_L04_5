@@ -83,7 +83,6 @@ l = [1,2,3]
 
 def subTract (L1, L2):
 	L3 = []
-
 	for x in L1:
 		if x not in L2:
 			L3.append(x)
@@ -96,13 +95,11 @@ def subTract (L1, L2):
 
 def MIS(G:g.Graph):
 	tot      = list(G.adj.keys())
-	power_set = powerSetVert(list(G.adj))
-	power_set_verts = []
+	#power_set = powerSetVert(list(G.adj))
+	power_set_verts = powerSetVert(list(G.adj))
 
-	for lst in power_set:
-		elm = subTract(tot,lst)
-
-		power_set_verts.append(elm)
+	"""	for lst in power_set:
+		power_set_verts.append(lst)"""
 	max_vert = []
 	for verts in power_set_verts:
 		if isIndepSet (verts,G):
@@ -163,17 +160,49 @@ def run_lst_sum_test(num_nodes, num_runs):
 		str_elm += "_"*(3*num_adj + 4) + "_|\n"
 		string += str_elm
 
+	string += "\n"
 	print(string)
 
-run1 = False
-run2= True
+def is_A_Mvc (lst_verts, G:g.Graph):
+	return is_A_Cover(lst_verts, G) and len(lst_verts) == len(MVC(G))
+
+def run_complement_tests (num_nodes, num_runs):
+	graph = g.create_rand_graph_safe(num_nodes,0)
+	num_adj = len (str(list(graph.adj.keys())))
+
+	string = "Graph verts".ljust(num_adj, " ")
+	string+= " | "
+	string+= "MIS".ljust(num_adj," ")
+	string+= " | "
+	string+= "Potentail MVC".ljust(num_adj," ")
+	string+= " | "
+	string+= "IS AN MVC?\n" 
+
+
+	for num_edges in range (num_runs):
+		graph = g.create_rand_graph_safe(num_nodes,num_edges)
+		num_adj = len (str(list(graph.adj.keys())))
+		mis = MIS(graph)
+		lst_graph_verts = list(graph.adj.keys())
+		potentail_MVC = subTract(lst_graph_verts, mis )
+		fax = is_A_Mvc(potentail_MVC,graph)
+		string+= str(lst_graph_verts) + " - " + str(mis).ljust(num_adj , " ") + " = " + str( potentail_MVC ).ljust(num_adj , " ")  + "  " + str(fax) + "\n"
+
+	print(string)
+		
+	pass
+
+
+run1 = True
+run2 = True
+run3 = True
 if run1:
 	run_size_sum_test(10,20)
 	run_size_sum_test(11,20)
 	run_size_sum_test(12,20)
 	run_size_sum_test(13,20)
 	plt.title("Number of edges vs Sum Size")
-	plt.xlabel("Sum Size")
+	plt.ylabel("Sum Size")
 	plt.xlabel("Number of edges")
 	plt.legend(loc="upper left" , bbox_to_anchor=(1,0.5))
 	plt.show()
@@ -184,11 +213,14 @@ if run2:
 	run_lst_sum_test(11,20)
 	run_lst_sum_test(12,20)
 	run_lst_sum_test(13,20)
+
+
+
+if run3:
+	run_complement_tests(10,20)
+	run_complement_tests(11,20)
+	run_complement_tests(12,20)
+	run_complement_tests(13,20)
 	pass
+
 #print(powerSetVert([1,2,3,4]))
-
-
-
-
-
-

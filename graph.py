@@ -19,10 +19,10 @@ class Graph:
 
     def add_edge(self, node1, node2):
 
-        if node1 == node2:
+        """if node1 == node2:
             self.adj[node1].append(node2)
             return
-
+        """
 
         if node1 not in self.adj[node2]:
             self.adj[node1].append(node2)
