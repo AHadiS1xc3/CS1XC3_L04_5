@@ -1,39 +1,22 @@
 import graph as g
 import matplotlib.pyplot as plt
-from tqdm import tqdm
 
 def powerSetVert (lst_verts) :
     if len (lst_verts) == 0 :
         return [[]]
     else:
-        
-
         oset =  powerSetVert(lst_verts[1:len(lst_verts)])
         pset =  []
-
         for lst in oset:
             elm = lst.copy()
-
             pset.append(elm)
-
-
-
-        
         for lst in pset:
             lst.append(lst_verts[0])
-
-
-
-
-
         return oset +  pset
 
 
 def isIndepSet (lst,G:g.Graph):
-
     pos_edges = [ ]
-
-
     for x in range (len(lst)):
         for y in range (x,len(lst)):
             pos_edges.append ((lst[x],lst[y]))
@@ -127,41 +110,11 @@ for (e1,e2) in E:
 
 def run_size_sum_test(num_nodes, num_runs):
 	sum_size = []
-	for num_edges in tqdm(range (num_runs)):
+	for num_edges in range (num_runs):
 		graph = g.create_rand_graph_safe(num_nodes,num_edges)
 		sum_lst = len (MIS(graph)) + len(MVC(graph))
 		sum_size.append(sum_lst)
 	plt.plot(sum_size, label="Graph with " + str(num_nodes) + " nodes" )
-
-def run_lst_sum_test(num_nodes, num_runs):
-
-	graph = g.create_rand_graph_safe(num_nodes,0)
-	num_adj = len (str(list(graph.adj.keys())))
-	string = "MIS set".center(num_adj, " ")+ " | "
-	string +="MVC set".center(num_adj, " ")+ " | "
-	string +="Set concat".center(num_adj - 1," ")+ "| "
-	string += "\n"
-	string +="|".center(2*num_adj + 3 , "_") + "_"
-	string +="|".ljust(num_adj,"_")+"_|"
-	string += "\n"
-	
-	for num_edges in tqdm(range (num_runs)):
-		graph = g.create_rand_graph_safe(num_nodes,num_edges)
-		num_adj = len (str(list(graph.adj.keys())))
-		mis     = MIS(graph)
-		mvc     = MVC(graph)
-		sum_lst = mis.copy() + mvc.copy()
-		mis.sort()
-		mvc.sort()
-		sum_lst.sort()
-
-		str_elm = " "*(3*num_adj+4) + " |\n"
-		str_elm += str(mis).center(num_adj ," ")+" + " + str(mvc).center(num_adj, " ") + "="  + str(sum_lst) + " |\n"
-		str_elm += "_"*(3*num_adj + 4) + "_|\n"
-		string += str_elm
-
-	string += "\n"
-	print(string)
 
 def is_A_Mvc (lst_verts, G:g.Graph):
 	return is_A_Cover(lst_verts, G) and len(lst_verts) == len(MVC(G))
@@ -195,7 +148,7 @@ def run_complement_tests (num_nodes, num_runs):
 
 run1 = True
 run2 = True
-run3 = True
+#--- CODE BELOW GENERATED FIG IV.1 ----
 if run1:
 	run_size_sum_test(10,20)
 	run_size_sum_test(11,20)
@@ -206,21 +159,25 @@ if run1:
 	plt.xlabel("Number of edges")
 	plt.legend(loc="upper left" , bbox_to_anchor=(1,0.5))
 	plt.show()
+#-------------------------------------
+
 
 if run2:
-
-	run_lst_sum_test(10,20)
-	run_lst_sum_test(11,20)
-	run_lst_sum_test(12,20)
-	run_lst_sum_test(13,20)
-
-
-
-if run3:
+	#--- CODE BELOW GENERATED FIG IVCT.1 ----
 	run_complement_tests(10,20)
+	#----------------------------------------
+
+	#--- CODE BELOW GENERATED FIG IVCT.2 ----
 	run_complement_tests(11,20)
+	#----------------------------------------
+
+	#--- CODE BELOW GENERATED FIG IVCT.3 ----
 	run_complement_tests(12,20)
+	#----------------------------------------
+
+	#--- CODE BELOW GENERATED FIG IVCT.4 ----
 	run_complement_tests(13,20)
-	pass
+	#----------------------------------------
+	
 
 #print(powerSetVert([1,2,3,4]))
