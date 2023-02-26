@@ -208,7 +208,7 @@ def create_rand_graph_safe (num_nodes, num_edges):
         G.add_edge(x,y)
     return G
 
-#### test cases based on differnet number of edges
+#### test cases based on differnet number of edges 
 def test1_edge():
     approx1_perf=[]
     for num_edges in range (1,31):
@@ -248,7 +248,7 @@ def test3_edge():
         approx3_perf.append(expected_performance3)
     return approx3_perf
 
-#### graph for test cases based on differnet number of edges
+#### graph for test cases based on differnet number of edges (figure Approximation.1)
 list_len = len(test1_edge())
 x = np.arange(1, list_len + 1)
 plot.figure("figure Approximation.1")
@@ -261,7 +261,7 @@ plot.ylabel("Expected Performance")
 plot.legend()
 plot.show()
 
-#### test cases based on differnet number of nodes
+#### test cases based on differnet number of nodes 
 def test1_node():
     approx1_perf=[]
     for num_nodes in range (5,11):
@@ -301,7 +301,7 @@ def test3_node():
         approx3_perf.append(expected_performance3)
     return approx3_perf
 
-#### graph for test cases based on differnet number of nodes
+#### graph for test cases based on differnet number of nodes (figure Approximation.2)
 list_len = len(test1_node())
 x = np.arange(5, 11)
 plot.figure("figure Approximation.2")
@@ -403,7 +403,7 @@ def nTest3_node():
             
     return approx3_perf
 
-#### worst-case analysis based on differnet number of nodes
+#### worst-case analysis based on differnet number of nodes (figure Approximation.3)
 list_len = len(nTest1_node())
 x = np.arange(1, 6)
 plot.figure("figure Approximation.3")
