@@ -28,10 +28,11 @@ class Graph:
             self.adj[node1].append(node2)
             self.adj[node2].append(node1)
 
-            
+    def number_of_nodes(self):
+        return len(self.adj)
 
-    def number_of_nodes():
-        return len()
+    def returnAdj(self):
+        print(self.adj)
 
 
 #Breadth First Search
@@ -70,6 +71,81 @@ def DFS(G : Graph, node1, node2):
                 S.append(node)
     return False
 
+
+#Breadth First Search
+def BFS2(G, node1, node2):
+    Q = deque([node1])
+    marked = {node1 : True}
+    
+    path = [] #initalizing list of nodes needed to travel from node1 to node2 on the shortest path
+    
+    for node in G.adj:
+        if node != node1: 
+            marked[node] = False
+    while len(Q) != 0:
+        current_node = Q.popleft()
+        
+        path.append(current_node) #adding to the list "path" the current node we are at
+        for node in G.adj[current_node]:
+            if node == node2:
+                #adding to the list "path" the node that we are looking for, node2, and then printing the whole path from node1 to node2
+                path.append(node)
+                
+                #printing a new list "answer" which will remove nodes from "path" that are not part of shortest path from node1 to node2
+                answerKey = node                
+                answer = [node]
+                for i in range(len(path)-2, -1, -1):
+                    if answerKey in G.adj[path[i]]:
+                       answer.append(path[i])
+                       answerKey = path[i]
+                print(answer)            
+                return True
+            if not marked[node]:
+                Q.append(node)
+                marked[node] = True
+                path.append(node)  #adding to the "path" list the node that we have not visited before that may be part of final path
+            else:
+                #if we encounter a node that we already marked and does not help us find a path from node1 to node2,
+                # then we delete that node from the "path" list
+                path.pop()
+    print([]) #print empty list if there is no path from node1 to node2
+    return False
+
+#Depth First Search
+def DFS2(G, node1, node2):
+    S = [node1]
+    marked = {}
+    path = []
+    
+    for node in G.adj:
+        marked[node] = False
+    
+    while len(S) != 0:
+        current_node = S.pop()
+                
+        if not marked[current_node]:
+
+            #adding to the list "path" the current node we are at that is also not been visited before
+            path.append(current_node)
+            
+            marked[current_node] = True
+            for node in G.adj[current_node]:
+                if node == node2:
+                    #adding to the list "path" the node that we are looking for, node2, and then printing the whole path from node1 to node2
+                    path.append(node)
+                    print(path)
+                    return True
+                
+                S.append(node)
+        else:
+            #if we encounter a node that we already marked and does not help us find a path from node1 to node2,
+                # then we delete that node from the "path" list
+            if len(path) > 0:
+                path.pop()   
+    
+    #if we encounter no path from node1 to node2, then we print the empty list
+    print([])
+    return False
 
 def BFS3 (G: Graph , node1: int  ):
     path_pred = {}
